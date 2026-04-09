@@ -1,0 +1,24 @@
+Appendix A — Full Prompt History
+
+Prompt 1 — Claude (Version 1)
+"I have a CSV dataset called SM_1_WMD_Features_and_Labels.csv with 128 acoustic feature columns named 0 to 127 and a SPECIES target column. Write a complete Python script that loads the data, handles missing values with median imputation, encodes labels, splits 80/20 with stratification on the target, scales features with StandardScaler, and trains and compares five classifiers: Random Forest, KNN (k=5), SVM with RBF kernel, Decision Tree, and Logistic Regression. Include a 2D PCA scatter plot for visualisation, a bar chart comparing model accuracy, and a confusion matrix for the best-performing model. Print a classification report for each model."
+Prompt 2 — Claude (Version 2)
+"Improve the code by wrapping all models in sklearn Pipelines so preprocessing is included inside the pipeline and won't cause data leakage during cross-validation. Add 5-fold stratified cross-validation using StratifiedKFold, report CV mean +/- standard deviation alongside test accuracy. Add class_weight='balanced' to all classifiers to handle the class imbalance. Also add macro-averaged F1 score as a second metric, and add a PCA cumulative variance explained curve as a second figure. Update the PCA scatter so each species has a named legend label and a distinct colour."
+Prompt 3 — Claude (Version 3)
+"Add GridSearchCV hyperparameter tuning for Random Forest, searching over n_estimators in [100, 200], max_depth in [None, 20], and min_samples_leaf in [1, 2]. Also integrate PCA dimensionality reduction inside the pipelines for KNN, SVM, and Logistic Regression, using the number of PCA components that explain 95% of variance (compute this dynamically from training data). Add an error analysis section that prints which species are most frequently confused."
+Prompt 4 — Claude (Version 4)
+"Merge the best features of Version 2 and Version 3 into a single clean script. Add a printed class distribution summary at the start, include both a 2D PCA scatter and the variance curve, and ensure the model comparison figure shows both CV and test accuracy side by side."
+Prompt 5 — Mixed tools (Versions 5–6)
+"Improve the visualisations. Use seaborn for the PCA scatter with a proper per-species colour legend, add axis labels showing the percentage of variance explained on each PC, add precision-recall curves for each class, and a 3D PCA projection. Raise all figures to 300 DPI and add annotated value labels above bars."
+Prompt 6 — Mixed tools (Version 7)
+"Fix the data leakage in imputation: split the data before any preprocessing, then compute the training set median and apply it to both train and test separately. Also set max_depth=10 on Decision Tree, use PCA(n_components=0.95) as a float rather than a fixed integer, and switch Logistic Regression to the SAGA solver for better multi-class convergence."
+Prompt 7 — Mixed tools (Versions 8–12)
+"Add a normalised confusion matrix (normalize='true'), show accuracy and macro F1 side-by-side in the model comparison chart, add a KDE density overlay on the PCA scatter, add convex hull boundaries per species, add a top-misclassifications bar chart, add a cumulative feature importance curve, and add a feature correlation heatmap for the top 20 Random Forest features."
+Prompt 8 — Mixed tools (Versions 13–16)
+"Change model selection to use macro F1 instead of accuracy. Standardise the global plot style using plt.rcParams. Add a per-species F1 bar chart. Add a show_and_save() helper function that saves and displays each figure. Use a custom pastel purple/pink/blue palette throughout."
+Prompt 9 — Mixed tools (Versions 17–18)
+"Reintroduce GridSearchCV for the best model (searching C and gamma if SVM). Add balanced_accuracy_score. Add permutation importance as a model-agnostic feature importance measure. Add a cross-validation boxplot for the best model. Add a class distribution bar chart as the first figure."
+Prompt 10 — ChatGPT (Version 19)
+"Move the SimpleImputer inside each pipeline so that imputation is performed within the pipeline during cross-validation rather than outside it. Add a spectral centroid feature computed from the existing feature columns. Add per-species precision-recall curves and a radar chart comparing acoustic profiles of the top three species. Add a per-species F1 ranking bar chart."
+Prompt 11 — Google Gemini (Version 20)
+"Fully integrate the spectral centroid engineering. Add a zero-variance feature filter. Add a robustness test that injects Gaussian noise (2% of feature standard deviation) into the test set and reports accuracy. Add a model calibration curve, a spectral centroid boxplot by species, and a CV vs test accuracy summary chart. Fix any remaining bugs."
